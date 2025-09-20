@@ -1,5 +1,7 @@
 // Work.tsx
 import React from "react";
+import { motion } from "framer-motion";
+import { useInView } from "react-intersection-observer";
 import { ExternalLink, Github } from "lucide-react";
 import "./styles.css";
 
@@ -7,6 +9,47 @@ import "./styles.css";
 import { Badge } from "../TechBadge";
 
 const Work: React.FC = () => {
+  const [ref, inView] = useInView({
+    triggerOnce: true,
+    threshold: 0.1
+  });
+
+  const containerVariants = {
+    hidden: { opacity: 0, y: 30 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.6,
+        staggerChildren: 0.2
+      }
+    }
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.5
+      }
+    }
+  };
+
+  const cardVariants = {
+    hidden: { opacity: 0, y: 30 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.5 }
+    },
+    hover: {
+      y: -8,
+      transition: { duration: 0.3 }
+    }
+  };
+
   const projects = [
     {
       title: "Shortly (Custom URL Shortener)",
@@ -35,59 +78,89 @@ const Work: React.FC = () => {
   ];
 
   return (
-    <section id="work" className="work-section">
+    <motion.section
+      id="work"
+      className="work-section"
+      ref={ref}
+      variants={containerVariants}
+      initial="hidden"
+      animate={inView ? "visible" : "hidden"}
+    >
       <div className="container">
-        <h2 className="section-title">Projects</h2>
+        <motion.h2
+          className="section-title"
+          variants={itemVariants}
+        >
+          Projects
+        </motion.h2>
 
-        <div className="projects-grid">
+        <motion.div
+          className="projects-grid"
+          variants={containerVariants}
+        >
           {projects.map((project, index) => (
-            <div key={index} className="project-card">
+            <motion.div
+              key={index}
+              className="project-card"
+              variants={cardVariants}
+              whileHover="hover"
+            >
               <div className="project-content">
                 <div className="project-info">
                   <div className="project-header">
                     <h3 className="project-title">{project.title}</h3>
                     <div className="project-links">
-                      <a
+                      <motion.a
                         href={project.link}
                         className="project-link secondary"
                         target="_blank"
                         rel="noopener noreferrer"
+                        whileHover={{ scale: 1.05 }}
+                        whileTap={{ scale: 0.95 }}
                       >
                         <ExternalLink size={16} />
                         <span>Live Demo</span>
-                      </a>
-                      <a
+                      </motion.a>
+                      <motion.a
                         href={project.github}
                         className="project-link secondary"
                         target="_blank"
                         rel="noopener noreferrer"
+                        whileHover={{ scale: 1.05 }}
+                        whileTap={{ scale: 0.95 }}
                       >
                         <Github size={16} />
                         <span>Code</span>
-                      </a>
+                      </motion.a>
                     </div>
                   </div>
                   <p className="project-description">{project.description}</p>
 
                   <div className="project-tech">
                     {project.tech.map((techName, techIndex) => (
-                      <Badge
+                      <motion.div
                         key={`${project.title}-${techName}-${techIndex}`}
-                        techName={techName}
-                        variant="solid"
-                        size="sm"
-                        showName={true}
-                        className="project-tech-badge"
-                      />
+                        initial={{ opacity: 0, scale: 0.8 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        transition={{ delay: techIndex * 0.05, duration: 0.3 }}
+                      >
+                        <Badge
+                          techName={techName}
+                          variant="solid"
+                          size="sm"
+                          showName={true}
+                          className="project-tech-badge"
+                        />
+                      </motion.div>
                     ))}
                   </div>
                 </div>
               </div>
-            </div>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
       </div>
-    </section>
+    </motion.section>
   );
 };
 

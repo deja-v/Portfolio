@@ -1,9 +1,39 @@
 // components/Experience.js
 import React from "react";
+import { motion } from "framer-motion";
+import { useInView } from "react-intersection-observer";
 import "./styles.css";
 import ExperienceCard from "./ExpirienceCard";
 
 const Experience: React.FC = () => {
+  const [ref, inView] = useInView({
+    triggerOnce: true,
+    threshold: 0.1
+  });
+
+  const containerVariants = {
+    hidden: { opacity: 0, y: 30 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.6,
+        staggerChildren: 0.2
+      }
+    }
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.5
+      }
+    }
+  };
+
   const experiences = [
     // {
     //   title: "Senior Frontend Developer",
@@ -78,17 +108,34 @@ const Experience: React.FC = () => {
   ];
 
   return (
-    <section id="experience" className="experience-section">
+    <motion.section
+      id="experience"
+      className="experience-section"
+      ref={ref}
+      variants={containerVariants}
+      initial="hidden"
+      animate={inView ? "visible" : "hidden"}
+    >
       <div className="container">
-        <h2 className="section-title">Work Experience</h2>
+        <motion.h2
+          className="section-title"
+          variants={itemVariants}
+        >
+          Work Experience
+        </motion.h2>
 
-        <div className="experience-cards">
+        <motion.div
+          className="experience-cards"
+          variants={containerVariants}
+        >
           {experiences.map((experience, index) => (
-            <ExperienceCard key={index} experience={experience} />
+            <motion.div key={index} variants={itemVariants}>
+              <ExperienceCard experience={experience} />
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
       </div>
-    </section>
+    </motion.section>
   );
 };
 
