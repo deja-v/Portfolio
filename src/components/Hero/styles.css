@@ -1,0 +1,121 @@
+/* components/Hero.css */
+.hero-section {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 24px;
+}
+
+.hero-content {
+  max-width: 1024px;
+  text-align: center;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 1s ease;
+}
+
+.hero-content.fade-in {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.hero-text {
+  margin-bottom: 48px;
+}
+
+.hero-title {
+  font-size: clamp(3rem, 8vw, 5rem);
+  font-weight: 300;
+  margin-bottom: 24px;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+}
+
+.hero-name {
+  font-weight: 500;
+  color: #2563eb;
+  position: relative;
+}
+
+.hero-name::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: linear-gradient(90deg, #2563eb, #3b82f6);
+  border-radius: 2px;
+}
+
+.hero-subtitle {
+  font-size: clamp(1.1rem, 3vw, 1.5rem);
+  color: #6b7280;
+  font-weight: 300;
+  line-height: 1.6;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.hero-social {
+  display: flex;
+  justify-content: center;
+  gap: 24px;
+  margin-bottom: 48px;
+}
+
+.social-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  background: white;
+  border-radius: 50%;
+  color: #374151;
+  text-decoration: none;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+.social-link:hover {
+  transform: translateY(-2px) scale(1.1);
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.2);
+  color: #2563eb;
+}
+
+.scroll-indicator {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  background: #2563eb;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin: 0 auto;
+}
+
+.scroll-indicator:hover {
+  background: #1d4ed8;
+  transform: scale(1.1);
+}
+
+@media (max-width: 768px) {
+  .hero-section {
+    padding: 0 16px;
+  }
+  
+  .hero-social {
+    gap: 16px;
+  }
+  
+  .social-link {
+    width: 44px;
+    height: 44px;
+  }
+}

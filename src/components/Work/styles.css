@@ -1,0 +1,146 @@
+.work-section {
+  padding: 20px 0;
+  /* background: #222831; */
+}
+
+.projects-grid {
+  display: flex;
+  flex-direction: column;
+  max-width: 800px;
+  margin: 0 auto;
+  gap: 24px;
+}
+
+.project-card {
+  border-radius: 12px;
+  padding: 16px;
+  border: 1px dotted #6b7280;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+.project-card:hover {
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.15);
+  transform: translateY(-2px);
+}
+
+.project-content {
+  display: grid;
+  /* grid-template-columns: 1fr 1fr; */
+  gap: 32px;
+  align-items: center;
+}
+
+.project-header {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.project-title {
+  font-size: 16px;
+  font-weight: 500;
+  color: #EEEEEE;
+}
+
+.project-description {
+  color: #dbeafe;
+  line-height: 1.6;
+  margin-bottom: 16px;
+  font-size: 14px;
+}
+
+.project-tech {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.tech-badge {
+  padding: 4px 12px;
+  background: #dbeafe;
+  color: #26282B;
+  border-radius: 16px;
+  font-size: 10px;
+  font-weight: 500;
+}
+
+.project-links {
+  display: flex;
+  gap: 8px;
+}
+
+.project-link {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: #2563eb;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 14px;
+  transition: color 0.2s ease;
+}
+
+.project-link:hover {
+  color: #1d4ed8;
+}
+
+.project-link.secondary {
+  color: #6b7280;
+}
+
+.project-link.secondary:hover {
+  color: #9ca3af;
+}
+
+.project-preview {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.preview-placeholder {
+  width: 100%;
+  aspect-ratio: 16/9;
+  background: linear-gradient(135deg, #f3f4f6, #e5e7eb);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #9ca3af;
+  font-weight: 500;
+}
+
+/* Alternate layout for even projects */
+/* .project-card:nth-child(even) .project-content {
+  grid-template-columns: 1fr 1fr;
+} */
+
+.project-card:nth-child(even) .project-info {
+  order: 2;
+}
+
+.project-card:nth-child(even) .project-preview {
+  order: 1;
+}
+
+@media (max-width: 768px) {
+  .project-content {
+    /* grid-template-columns: 1fr !important; */
+    gap: 24px;
+  }
+  
+  .project-card:nth-child(even) .project-info,
+  .project-card:nth-child(even) .project-preview {
+    order: initial;
+  }
+  
+  .project-card {
+    padding: 24px;
+  }
+  
+  .projects-grid {
+    gap: 32px;
+  }
+}
